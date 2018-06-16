@@ -1,0 +1,52 @@
+<form name="editForm" role="form" novalidate ng-submit="confirm()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" aria-hidden="true"
+                ng-click="dismiss()">&times;
+        </button>
+        <h4 class="modal-title"> Create or edit a Activity</h4>
+    </div>
+    <div class="modal-body">
+
+        <div class="row margin-0" ng-show="errorMessage">
+            <div class="alert alert-danger" role="alert">{{errorMessage}}</div>
+        </div>
+
+        <div class="form-group" ng-show="activity.id">
+            <label>ID</label>
+            <input type="text" class="form-control" name="id" ng-model="activity.id" readonly>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Activity Name</label>
+            <input type="text" class="form-control" name="name" ng-model="activity.name">
+        </div>
+        <div class="form-group">
+            <label class="control-label">Duration</label>
+            <select class="form-control" ng-disabled="activity.isNetworking == true"
+                    ng-options="duration as duration + ' mins' for duration in durations"
+                    ng-model="activity.duration">
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Summary</label>
+            <input type="text" class="form-control" name="summary" ng-model="activity.summary">
+        </div>
+        <div class="form-group">
+            <label for="networking">
+                <input type="checkbox" id="networking"
+                       name="networking" ng-model="activity.isNetworking"
+                       ng-change="onNetworkingFlagChanged()">
+                <span>Networking</span>
+            </label>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="dismiss()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

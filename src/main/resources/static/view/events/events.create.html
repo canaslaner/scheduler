@@ -1,0 +1,43 @@
+<form name="editForm" role="form" novalidate ng-submit="confirm()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="dismiss()">&times;
+        </button>
+        <h4 class="modal-title"> Create or edit a Event</h4>
+    </div>
+    <div class="modal-body">
+
+        <div class="row margin-0" ng-show="errorMessage">
+            <div class="alert alert-danger" role="alert">{{errorMessage}}</div>
+        </div>
+
+        <div class="form-group" ng-show="event.id">
+            <label>ID</label>
+            <input type="text" class="form-control" name="id" ng-model="event.id" readonly>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Event Name</label>
+            <input type="text" class="form-control" name="name" ng-model="event.name">
+        </div>
+        <div class="form-group">
+            <label class="control-label">Event Date</label>
+            <input class="input-sm form-control ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-required"
+                   name="date" ng-model="event.date" aria-invalid="false"
+                   type="date">
+        </div>
+        <div class="form-group">
+            <label class="control-label">Summary</label>
+            <input type="text" class="form-control" name="summary" ng-model="event.summary">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="dismiss()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

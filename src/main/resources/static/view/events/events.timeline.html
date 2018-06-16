@@ -1,0 +1,38 @@
+<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="dismiss()">&times;
+    </button>
+    <h4 class="modal-title">Timeline for : <span class='label label-primary'>{{event.name}}</span></h4>
+</div>
+<div class="modal-body">
+    <div class="row margin-0" ng-show="errorMessage">
+        <div class="alert alert-danger" role="alert">{{errorMessage}}</div>
+    </div>
+    <div class="row margin-0" ng-repeat="scheduleDto in scheduleDtoList">
+        {{scheduleDto.name}}
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th><span>TIME</span></th>
+                    <th><span>NAME</span></th>
+                    <th><span>DURATION</span></th>
+                    <th><span>SUMMARY</span></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="(key, value) in scheduleDto.schedule">
+                    <td>{{key}}</td>
+                    <td>{{value.name}}</td>
+                    <td>{{value.duration}} <span ng-show="value.duration">[mins]</span></td>
+                    <td>{{value.summary}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" ng-click="dismiss()">
+        <span class="glyphicon glyphicon-ok-circle"></span>&nbsp;<span>OK</span>
+    </button>
+</div>

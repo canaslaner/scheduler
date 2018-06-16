@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<body>
+
+<ol class="breadcrumb">
+    <li class="active">EVENT MANAGEMENT</li>
+</ol>
+
+<div class="row margin-0" ng-show="errorMessage">
+    <div class="alert alert-danger" role="alert">{{errorMessage}}</div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="pull-right">
+            <button class="btn btn-primary" ui-sref="events.create()">
+                <span class="glyphicon glyphicon-flash"></span><span>Create New Event</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="jh-table table table-striped">
+        <thead>
+        <tr>
+            <th><span>ID</span></th>
+            <th><span>NAME</span></th>
+            <th><span>EVENT DATE</span></th>
+            <th><span>CREATION</span></th>
+            <th></th>
+            <th class="text-right"><span>ACTIONS</span></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="event in events">
+            <td>{{event.id}}</td>
+            <td>{{event.name}}</td>
+            <td>{{event.date | date:'dd/MM/yy'}}</td>
+            <td>{{event.createdTs | date:'dd/MM/yy HH:mm'}}</td>
+            <td class="text-right">
+                <div class="btn-group flex-btn-group-container">
+                    <button type="submit" ui-sref="events.timeline({event : event})"
+                            class="btn btn-warning btn-sm">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        <span class="hidden-xs hidden-sm"> Show Timeline</span>
+                    </button>
+                </div>
+            </td>
+            <td class="text-right">
+                <div class="btn-group flex-btn-group-container">
+                    <button type="submit"
+                            ui-sref="events.update({event: event})"
+                            class="btn btn-primary btn-sm">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        <span class="hidden-xs hidden-sm"> Edit</span>
+                    </button>
+                    <button type="submit"
+                            ui-sref="events.delete({event: event})"
+                            class="btn btn-danger btn-sm">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                        <span class="hidden-xs hidden-sm"> Delete</span>
+                    </button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

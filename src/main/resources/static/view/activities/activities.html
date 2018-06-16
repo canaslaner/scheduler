@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<body>
+<ol class="breadcrumb">
+    <li class="active">ACTIVITY MANAGEMENT</li>
+</ol>
+
+<div class="row margin-0" ng-show="errorMessage">
+    <div class="alert alert-danger" role="alert">{{errorMessage}}</div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="input-group">
+            <div class="input-group-addon">Event List</div>
+            <select class="form-control"
+                    ng-options="event as event.name for event in events"
+                    ng-model="selectedEvent"
+                    ng-change="onEventChanged()">
+            </select>
+            <span class="input-group-btn">
+                <button type="submit" class="btn btn-primary" ng-click="onEventChanged()" ng-disabled="!selectedEvent">
+                    <span class="glyphicon glyphicon-refresh"></span>
+                </button>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="pull-right">
+            <button class="btn btn-primary"
+                    ui-sref="activities.create({event: selectedEvent, onSuccess: onEventChanged})"
+                    ng-show="selectedEvent">
+                <span class="glyphicon glyphicon-flash"></span><span>Create New Activity</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive" ng-show="selectedEvent">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th><span>ID</span></th>
+            <th><span>NAME</span></th>
+            <th><span>DURATION</span></th>
+            <th><span>CREATION</span></th>
+            <th class="text-right">ACTIONS</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="activity in activities">
+            <td>{{activity.id}}</td>
+            <td>{{activity.name}}</td>
+            <td>{{activity.duration}} [mins]</td>
+            <td>{{activity.createdTs | date:'dd/MM/yy HH:mm'}}</td>
+            <td class="text-right">
+                <div class="btn-group flex-btn-group-container">
+                    <button type="submit"
+                            ui-sref="activities.update({activity: activity, onSuccess: onEventChanged})"
+                            class="btn btn-primary btn-sm">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        <span class="hidden-xs hidden-sm"> Edit</span>
+                    </button>
+                    <button type="submit"
+                            ui-sref="activities.delete({activity: activity, onSuccess: onEventChanged})"
+                            class="btn btn-danger btn-sm">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                        <span class="hidden-xs hidden-sm"> Delete</span>
+                    </button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+</html>
